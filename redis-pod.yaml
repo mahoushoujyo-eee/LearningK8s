@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-pod
+  labels:
+    app: redis
+spec:
+  containers:
+  - name: redis
+    image: redis:latest # 使用最新稳定版的 Redis 镜像
+    ports:
+    - containerPort: 6379 # Redis 默认端口
+    volumeMounts:
+    - name: redis-data
+      mountPath: /data # Redis 数据持久化路径
+
+  volumes:
+  - name: redis-data
+    emptyDir: {} # 这里的 emptyDir 表示一个临时目录，Pod 删除后数据会丢失。
+                # 如果需要持久化，需要替换为 hostPath, persistentVolumeClaim 等
