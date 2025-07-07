@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuard
+  labels:
+    run: kuard
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: kuard
+  template:
+    metadata:
+      annotations:
+        kubernetes.io/change-cause: "change kuard image to red"
+      labels:
+        run: kuard
+    spec:
+        containers:
+          - name: kuard
+            image: "gcr.io/kuar-demo/kuard-amd64:red"
+            imagePullPolicy: Always
