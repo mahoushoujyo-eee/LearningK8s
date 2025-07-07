@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpaca-test
+  labels:
+    app: alpaca
+    env: test
+    ver: "2" # 标签可以是字符串或数字，但通常用引号引起来以保持一致性
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alpaca # 这必须与 Pod 模板的标签匹配
+  template:
+    metadata:
+      labels:
+        app: alpaca
+        env: test
+        ver: "2"
+    spec:
+      containers:
+      - name: alpaca-prod-container
+        image: gcr.io/kuar-demo/kuard-amd64:green
