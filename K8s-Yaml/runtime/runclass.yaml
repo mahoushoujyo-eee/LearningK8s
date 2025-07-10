@@ -1,0 +1,9 @@
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: my-runtime-class
+handler: containerd # 根据实际运行时修改
+overhead:
+  podFixed:
+    memory: "1000Mi"
+    cpu: "500m"
